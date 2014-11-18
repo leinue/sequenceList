@@ -6,15 +6,9 @@ class squenceList{
 	private $listElement=array();
 	private $maxSize;
 
-	function __construct($par_maxSize,$list){
+	function __construct($par_maxSize){
 		$this->maxSize=$par_maxSize;
-		if(is_array($list)){
-			$this->listElement=$list;
-			$this->curLen=count($list);
-		}else{
-			throw new Exception("list must be an array!", 1);
-		}
-		
+		$this->curLen=0;
 	}
 
 	function clear(){
@@ -39,7 +33,7 @@ class squenceList{
 	}
 
 	function insert($index,$x){
-		if($this->curLen==$maxSize){
+		if($this->curLen==$this->maxSize){
 			return -1; //序列表已满
 		}
 
@@ -47,12 +41,12 @@ class squenceList{
 			return -2; //index不合法
 		}
 
-		for($i=$this->ccurLen;$i>$index;$i--){ 
+		for($i=$this->curLen;$i>$index;$i--){ 
 			$this->listElement[$i]=$this->listElement[$i-1];
 		}
 
 		$this->listElement[$index]=$x;
-		$this->ccurLen+=1;
+		$this->curLen+=1;
 	}
 
 	function delete($index){
@@ -85,8 +79,15 @@ class squenceList{
 }
 
 $listArray=array('a','z','d','m','z');
-$listElem=new squenceList(5,$listArray);
+$listElem=new squenceList(5);
+
+$listElem->insert(0,'a');
+$listElem->insert(1,'z');
+$listElem->insert(2,'d');
+$listElem->insert(3,'m');
+$listElem->insert(4,'z');
 $listElem->display();
+
 print("*********display end*********<br>");
 $len=$listElem->length();
 print('len='.$len);
