@@ -37,7 +37,7 @@ class linkList{
 	
 	private $head;
 
-	function __construct(argument){
+	function __construct(){
 		$this->head=new node();
 	}
 
@@ -50,7 +50,20 @@ class linkList{
 	}
 
 	function get($i){
+		$p=$this->head->getNext();
 
+		$j=0;
+
+		while($p!=NULL && $j<$i){
+			$p=$this->head->getNext();
+			$j+=1;
+		}
+
+		if($p=null || $j>$i){
+			return -1; //不存在
+		}
+
+		return $p->getData();
 	}
 
 	function insert($i,$x){
@@ -78,11 +91,24 @@ class linkList{
 	}
 
 	function remnove($i){
+		$p=$this->head;
 
+		$j=-1;
+
+		while($p->getNext()!=NULL && $j<$i-1){
+			$p=$p->getNext();
+			$j+=1;
+		}
+
+		if($j>$i-1 || $p->getNext==NULL){
+			return -1; //删除位置不合法
+		}
+
+		$p->setNext($p->getNext()->getNext());
 	}
 
 	function indexOf($x){
-
+		
 	}
 
 	function clear(){
