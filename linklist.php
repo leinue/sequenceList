@@ -25,7 +25,7 @@ class node{
 		return $this->data=$Data;
 	}
 
-	function setNext(node $Next){
+	function setNext($Next){
 		$this->next=$Next;
 	}
 }
@@ -37,16 +37,18 @@ class linkList{
 	
 	private $head;
 
-	function __construct(){
-		$this->head=new node();
+	function __construct($Data=NULL){
+		$this->head=new node($Data);
 	}
 
-	function create1($n){
+	//下面这两个函数可以当作是降序或升序排列
 
+	function createAfterHead($Data){
+		$this->insert(0,$Data);
 	}
 
-	function create2($n){
-
+	function createAtLast($Data){
+		$this->insert($this->length(),$Data);
 	}
 
 	function get($i){
@@ -83,7 +85,7 @@ class linkList{
 		if($i==0){
 			//表头
 			$s->setNext($p);
-			$p=$s;
+			$this->head=$s;
 		}else{
 			$s->setNext($p->getNext());
 			$p->setNext($s);
@@ -150,5 +152,13 @@ class linkList{
 		}
 	}
 }
+
+$L=new linkList();
+
+for($i=0;$i<10;$i++){
+	$L->insert($i,$i);
+}
+
+$L->display();
 
 ?>
