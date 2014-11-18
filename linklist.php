@@ -108,7 +108,19 @@ class linkList{
 	}
 
 	function indexOf($x){
-		
+		$p=$this->getNext();
+
+		$j=0;
+		while($p!=NULL && $p->getData()==$x){
+			$p=$this->getNext();
+			$j+=1;
+		}
+
+		if($p!=NULL){
+			return $j;
+		}else{
+			return -1; //没有找到
+		}
 	}
 
 	function clear(){
