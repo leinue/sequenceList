@@ -38,7 +38,6 @@ class linkStack{
 		$p=new node($x);
 		$p->setNext($this->top);
 		$this->top=$p;
-		print($this->top->getData());
 	}
 
 	function pop(){
@@ -62,7 +61,7 @@ class linkStack{
 	function display(){
 		$p=$this->top;
 		while ($p!=NULL) {
-			print($this->top->getData()."  ");
+			print($p->getData()."  ");
 			$p=$p->getNext();
 		}
 	}
