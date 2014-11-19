@@ -41,7 +41,7 @@ class linkStack{
 	}
 
 	function pop(){
-		if(!($this->isEmpty())){
+		if($this->isEmpty()){
 			$p=$this->top;
 			$this->top=$this->top->getNext();
 			return $p->getData();
@@ -51,8 +51,8 @@ class linkStack{
 	}
 
 	function peek(){
-		if(!($this->isEmpty())){
-			return $this->top->getData();	
+		if($this->isEmpty()){
+			return $this->top->getData();
 		}else{
 			return NULL;
 		}
@@ -70,7 +70,6 @@ class linkStack{
 $linkstack=new linkStack();
 
 for($i=0;$i<5;$i++){
-	//print("$i");
 	$linkstack->push($i);
 }
 
@@ -83,4 +82,16 @@ print("peek=".$linkstack->peek());
 print("<br>");
 
 print("length=".$linkstack->length());
+
+print("<br>");
+
+print("pop=".$linkstack->pop());
+
+print("<br>");
+
+print("new display=".$linkstack->display());
+
+print("<br>");
+
+print("isEmpty=".$linkstack->isEmpty());
 ?>
