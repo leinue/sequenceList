@@ -52,11 +52,17 @@ class stack{
 		}
 	}
 
+	function display(){
+		for($i=$this->size-1;$i>=0;$i--){
+			print($this->stackElem[$i]."  ");
+		}
+	}
+
 }
 
-$sequenceStack=new stack(5);
+$sequenceStack=new stack(10);
 
-for($i=0;$i<5;$i++){
+for($i=0;$i<10;$i++){
 	$sequenceStack->push($i);
 }
 $s=$sequenceStack->peek();
@@ -65,4 +71,5 @@ if($s){
 }else{
 	print("fail");
 }
+$sequenceStack->display();
 ?>
