@@ -8,7 +8,7 @@ class node{
 	private $data;
 	private $next;
 
-	function __construct($Data=NULL,node $Next=NULL){
+	function __construct($Data=NULL,$Next=NULL){
 		$this->data=$Data;
 		$this->next=$next;
 	}
@@ -37,8 +37,8 @@ class linkList{
 	
 	private $head;
 
-	function __construct($Data=NULL){
-		$this->head=new node($Data);
+	function __construct($Data=NULL,$Next=NULL){
+		$this->head=new node($Data,$Next);
 	}
 
 	//下面这两个函数可以当作是降序或升序排列
@@ -92,7 +92,7 @@ class linkList{
 		}
 	}
 
-	function remnove($i){
+	function remove($i){
 		$p=$this->head;
 
 		$j=-1;
