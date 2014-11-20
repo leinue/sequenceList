@@ -3,6 +3,8 @@
 /**
 * 循环队列
 * 是顺序队列的一种,需要指定maxSize
+* 使用少用存储一个单元的方法来判断队满和队空状态
+* 所以在申请控件的时候假如要申请5个应该写6
 */
 class circleQueue{
 	
@@ -51,7 +53,7 @@ class circleQueue{
 		if($this->front==$this->rear){
 			return NULL;
 		}else{
-			$t=$queueElem[$this->front];
+			$t=$this->queueElem[$this->front];
 			$this->front=($this->front+1)%$this->maxSize;
 			return $t;
 		}
@@ -64,8 +66,27 @@ class circleQueue{
 			for($i=$this->front;$i!=$this->rear;$i=($i+1)%$this->maxSize){
 				print($this->queueElem[$i]."  ");
 			}
+			print("<br>");
 		}
 	}
 }
 
+$cq=new circleQueue(6);
+
+for($i=0;$i<5;$i++){
+	$cq->offer($i);
+}
+
+$cq->display();
+
+if($cq->isEmpty()){
+	print("<br>empty");
+}else{
+	print("<br>not empty");
+}
+
+print("<br>length=".$cq->length());
+print("<br>peek=".$cq->peek());
+print("<br>poll=".$cq->poll());
+print("<br>new display=".$cq->display()."<br>");
 ?>
