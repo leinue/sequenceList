@@ -43,10 +43,11 @@ class linkQueue{
 	}
 
 	function poll(){
+		print($this->front->getData());
 		if($this->front!=NULL){
 			$p=$this->front;
-			$this->front=$this->front->getNext();
-			return $p->getData();
+			$this->front=$this->front->getNext()->getNext();
+			return $p->getNext()->getData();
 		}else{
 			return NULL;
 		}
@@ -56,7 +57,7 @@ class linkQueue{
 		if($this->isEmpty()){
 			return NULL;
 		}else{
-			return $this->front->getData();
+			return $this->front->getNext()->getData();
 		}
 	}
 
