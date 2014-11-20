@@ -32,7 +32,7 @@ class priorityQueueData{
 	}
 }
 
-class linkQueue{
+class priorityQueue{
 	
 	private $front;
 	private $rear;
@@ -66,7 +66,7 @@ class linkQueue{
 			$p=$this->front;
 			$q=$this->front;
 
-			while($p!=NULL && $pn.getPriority()>=$p->getData()->getPriority()){
+			while($p!=NULL && $pn->getPriority()>=$p->getNext()->getData()->getPriority()){
 				$q=$p;
 				$p=$p->getNext();
 			}
@@ -90,11 +90,12 @@ class linkQueue{
 	}
 
 	function poll(){
-		print($this->front->getData());
 		if($this->front!=NULL){
 			$p=$this->front;
-			$this->front=$this->front->getNext()->getNext();
-			return $p->getNext()->getData();
+			$this->front=$this->front->getNext();
+			if($p->getNext()!=NULL){
+				return $p->getNext()->getData();
+			}
 		}else{
 			return NULL;
 		}
@@ -117,11 +118,33 @@ class linkQueue{
 			print("NULL");
 		}else{
 			$p=$this->front;
-			while($p!=NULL){
-				print($p->getData()."  ");
+			while($p!=NULL && $q=$p->getNext()!=NULL){
+				$q=$p->getNext()->getData();
+				print($q->getElem()."  ".$q->getPriority()."<br>");
 				$p=$p->getNext();
 			}
 		}
+	}
+}
+
+$pm=new priorityQueue();
+
+$pm->offer(new priorityQueueData(1,20));
+$pm->offer(new priorityQueueData(2,30));
+$pm->offer(new priorityQueueData(3,20));
+$pm->offer(new priorityQueueData(4,20));
+$pm->offer(new priorityQueueData(5,40));
+$pm->offer(new priorityQueueData(6,10));
+
+print("顺序:<br>");
+print("Elem---Priority<br>");
+
+$pm->display();
+
+while(!($pm->isEmpty())){
+	$p=$pm->poll();
+	if($p!=NULL){
+		print("---".$p->getElem()."------".$p->getPriority()."---<br>");
 	}
 }
 
