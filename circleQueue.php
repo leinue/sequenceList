@@ -39,11 +39,22 @@ class circleQueue{
 	}
 
 	function offer($x){
-
+		if(($this->rear+1)%$this->maxSize==$this->front){
+			return -1; //队列满
+		}else{
+			$this->queueElem[$this->rear]=$x;
+			$this->rear=($this->rear+1)%$this->maxSize;
+		}
 	}
 
 	function poll(){
-
+		if($this->front==$this->rear){
+			return NULL;
+		}else{
+			$t=$queueElem[$this->front];
+			$this->front=($this->front+1)%$this->maxSize;
+			return $t;
+		}
 	}
 
 	function display(){
