@@ -42,7 +42,7 @@ class sequenceString{
 
 	//在offset个字符之前插入str 0<=offset<=curlen
 	function insert($offset,$str){
-		if($offset<0 || $offset>$this->curlen){
+		if($offset<0){
 			return -1;//范围不对
 		}
 
@@ -52,7 +52,6 @@ class sequenceString{
 
 		//空间不足 分配空间
 		if($addedLength>$this->maxSize){
-			echo 'dssdsd';
 			$this->allocate();
 		}
 
@@ -94,7 +93,10 @@ class sequenceString{
 }
 
 $ss=new sequenceString(5);
-$ss->insert(2,"fuck");
+$ss->insert(0,"fuck");
 
-print("charAt=".$ss->charAt(8));
+print("charAt=".$ss->charAt(0)."<br>");
+
+$ss->insert(4,"bitch");
+print("charAt=".$ss->charAt(4));
 ?>
