@@ -10,9 +10,18 @@ class sequenceString{
 	private $curlen;
 	private $maxSize;
 
-	function __construct($max){
-		$this->curlen=0;
+	function __construct($max,$str=NULL){
 		$this->maxSize=$max;
+		$this->strValue=$str;
+		if($str==NULL){
+			$this->curlen=0;
+		}else{
+			if(is_array($str)){
+				$this->curlen=count($str);
+			}else{
+				$this->curlen=strlen($str);
+			}
+		}
 	}
 
 	function clear(){
@@ -37,7 +46,20 @@ class sequenceString{
 	}
 
 	function subString($begin,$end){
+		if($begin>$end){
+			return -2; //起始位置大于结束位置
+		}
 
+		if($begin<0 || $end>$this->curlen){
+			return -1; //插入位置不对
+		}
+
+		for($i=$begin,$j=0;$i<$end;$i++,$j++){
+			$char[$j]=$this->strValue[$i];
+		}
+
+		$newString=new sequenceString(count($char),$char);
+		return $newString;
 	}
 
 	//在offset个字符之前插入str 0<=offset<=curlen
@@ -66,6 +88,8 @@ class sequenceString{
 		}
 
 		$this->curlen=$addedLength;
+
+		return true;
 		//print_r($this->strValue);
 	}
 
@@ -93,11 +117,11 @@ class sequenceString{
 		}
 
 		$this->curlen=$this->curlen-($end-$begin);
-
+		return true;
 	}
 
 	function concat($str){
-
+		return $this->insert($this->curlen,$str);
 	}
 
 	function compareTo($str){
@@ -105,7 +129,15 @@ class sequenceString{
 	}
 
 	function indexOf($str,$begin){
-
+		/*if($begin>$this->curlen){
+			return -1; //超过长度
+		}else{
+			for($i=$begin,$j=0;$i<$this->curlen;$i++,$j++){
+				$char[$j]=$this->strValue[$i];
+			}
+			print_r($char);
+			return $char;
+		}*/
 	}
 }
 
@@ -130,4 +162,14 @@ echo '<br>char after delete=';
 for($i=0;$i<$ss->length();$i++){
 	print($ss->charAt($i));
 }
+
+$a=$ss->subString(1,3);
+
+echo '<br>new subString=';
+
+for($i=0;$i<$a->length();$i++){
+	print($a->charAt($i));
+}
+
+
 ?>
