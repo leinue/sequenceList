@@ -42,7 +42,7 @@ class sequenceString{
 
 	//在offset个字符之前插入str 0<=offset<=curlen
 	function insert($offset,$str){
-		if($offset<0){
+		if($offset<0 || $offset>$this->curlen){
 			return -1;//范围不对
 		}
 
@@ -66,6 +66,7 @@ class sequenceString{
 		}
 
 		$this->curlen=$addedLength;
+		//print_r($this->strValue);
 	}
 
 	function allocate(){
@@ -76,6 +77,22 @@ class sequenceString{
 	}
 
 	function delete($begin,$end){
+		if($begin<0 || $end>$this->curlen){
+			return -1; //删除位置不对
+		}
+
+		if($begin>$end){
+			return -2; //起始位置大于结束位置
+		}
+
+		for($i=0;$i<$this->curlen-$end;$i++){
+			$this->strValue[$begin+$i]=$this->strValue[$end+$i];
+			/*echo '<br>$begin+i='.$this->strValue[$begin+$i];
+			echo '<br>';
+			echo '$end+i='.$strValue[$end+$i];*/
+		}
+
+		$this->curlen=$this->curlen-($end-$begin);
 
 	}
 
@@ -98,5 +115,19 @@ $ss->insert(0,"fuck");
 print("charAt=".$ss->charAt(0)."<br>");
 
 $ss->insert(4,"bitch");
-print("charAt=".$ss->charAt(4));
+print("charAt=".$ss->charAt(8));
+
+echo '<br>char=';
+
+for($i=0;$i<$ss->length();$i++){
+	print($ss->charAt($i));
+}
+
+$ss->delete(2,5);
+
+echo '<br>char after delete=';
+
+for($i=0;$i<$ss->length();$i++){
+	print($ss->charAt($i));
+}
 ?>
