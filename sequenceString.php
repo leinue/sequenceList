@@ -29,15 +29,51 @@ class sequenceString{
 	}
 
 	function charAt($i){
-		
+		if($i<$this->length() && $i>=0){
+			return $this->strValue[$i];
+		}else{
+			return NULL;
+		}
 	}
 
 	function subString($begin,$end){
 
 	}
 
+	//在offset个字符之前插入str 0<=offset<=curlen
 	function insert($offset,$str){
+		if($offset<0 || $offset>$this->curlen){
+			return -1;//范围不对
+		}
 
+		$length=strlen($str);
+		$addedLength=$this->curlen+$length;
+		//print($addedLength."<br>");
+
+		//空间不足 分配空间
+		if($addedLength>$this->maxSize){
+			echo 'dssdsd';
+			$this->allocate();
+		}
+
+		for($i=$this->curlen-1;$i>=$offset;$i--){
+			$this->strValue[$length+$i]=$this->strValue[$i];
+			//print($this->strValue[$i]."<br>");
+		}
+
+		for($i=0;$i<$length;$i++){
+			$this->strValue[$offset+$i]=$str[$i];
+			//print("offset=$offset+$i;add=".$this->strValue[$offset+1]."<br>");
+		}
+
+		$this->curlen=$addedLength;
+	}
+
+	function allocate(){
+		$temp=$this->strValue;
+		for($i=0;$i<count($this->strValue);$i++){
+			$this->strValue[$i]=$temp[$i];
+		}
 	}
 
 	function delete($begin,$end){
@@ -57,4 +93,8 @@ class sequenceString{
 	}
 }
 
+$ss=new sequenceString(5);
+$ss->insert(2,"fuck");
+
+print("charAt=".$ss->charAt(8));
 ?>
