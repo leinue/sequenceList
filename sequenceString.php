@@ -125,7 +125,20 @@ class sequenceString{
 	}
 
 	function compareTo($str){
+		$len1=$this->length();
+		$len2=$str->length();
+		$len1>$len2 ? $n=$len2:$n=$len1;
 
+		$s1=$this->strValue;
+		while($k<$n){
+			$ch1=$s1[$k];
+			$ch2=$str->charAt($k);
+			if($ch1!=$ch2){
+				return $ch1-$ch2;
+			}
+			$k++;
+		}
+		return $len1-$len2;
 	}
 
 	function indexOf($str,$begin){
@@ -139,6 +152,7 @@ class sequenceString{
 			return $char;
 		}*/
 	}
+
 }
 
 $ss=new sequenceString(5);
