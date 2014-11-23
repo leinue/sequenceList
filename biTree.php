@@ -59,6 +59,34 @@ class biTree{
 	function setRoot($new){
 		$this->root=$new;
 	}
+
+	//先根遍历递归算法
+	function preRootTraverse(biTreeNode $T){
+		if($T!=NULL){
+			print($T->getData());
+			preOrderTraverse($T->getLchild());
+			preOrderTraverse($T->getRchild());
+		}
+	}
+
+	//中根遍历递归算法
+	function inRootTraverse(biTreeNode $T){
+		if($T!=NULL){
+			preOrderTraverse($T->getLchild());
+			print($T->getData());
+			preOrderTraverse($T->getRchild());
+		}		
+	}
+
+	//后根遍历递归算法
+	function postRootTraverse(biTreeNode $T){
+		if($T!=NULL){
+			preOrderTraverse($T->getLchild());
+			preOrderTraverse($T->getRchild());
+			print($T->getData());
+		}		
+	}	
+
 }
 
 ?>
