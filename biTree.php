@@ -283,6 +283,26 @@ function countNode($T){
 	return $count;
 }
 
+//使用层次遍历
+function countNodeWithQueue($T){
+	$count=0;
+	if($T!=NULL){
+		$l=new linkQueue();
+		$l->offer($T);
+		while(!$l->isEmpty()){
+			$T=$l->poll();
+			++$count;
+			if($T->getLchild()!=NULL){
+				$l->offer($T->getLchild());
+			}
+			if($T->getRchild()!=NULL){
+				$l->offer($T->getRchild());
+			}
+		}
+	}
+	return $count;
+}
+
 function getDepth($T){
 	if($T!=NULL){
 		$depth1=getDepth($T);
