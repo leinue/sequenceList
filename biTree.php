@@ -41,4 +41,24 @@ class biTreeNode{
 	}
 }
 
+/**
+* 二叉链式存储结构下二叉树类
+*/
+class biTree{
+
+	private $root;
+	
+	function __construct(){
+		
+	}
+
+	function getRoot(){
+		return $this->root;
+	}
+
+	function setRoot($new){
+		$this->root=$new;
+	}
+}
+
 ?>
