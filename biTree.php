@@ -262,4 +262,15 @@ class biTree{
 
 }
 
+function searchNode($T,$x){
+	if($T!=NULL){
+		if($T->getData()==$x){
+			return $T;
+		}else{
+			$lresult=searchNode($T->getLchild(),$x);
+			return $lresult!=NULL?$lresult:searchNode($T->getRchild(),$x);
+		}
+	}
+}
+
 ?>
