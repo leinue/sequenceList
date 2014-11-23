@@ -313,4 +313,22 @@ function getDepth($T){
 	}
 }
 
+function isEqual($T1,$T2){
+	if($T1=NULL && $T2=NULL){
+		return true;
+	}
+
+	if($T1!=NULL && $T2!=NULL){
+		if($T1->getData()==$T2->getData()){
+			if(isEqual($T1->getLchild(),$T2->getLchild())){
+				if(isEqual($T1->getRchild(),$T2->getRchild())){
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
 ?>
