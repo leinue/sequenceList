@@ -90,11 +90,11 @@ class biTree{
 		}		
 	}*/
 
-	//先根非递归算法
+	//先根遍历非递归算法
 	function preRootTraverse(){
 		$T=$this->root;
 
-		while($T!=NULL){
+		if($T!=NULL){
 			$stack=new linkStack();
 			$stack->push($T);
 			while(!$stack->isEmpty()){
@@ -105,12 +105,69 @@ class biTree{
 						print($T->getLchild()->getData());
 					}
 					if($T->getRchild()!=NULL){
-						print($T->getRchild()->getData());
+						$stack->push($T->getRchild());
 					}
+					$T=$T->getLchild();
 				}
 			}
 		}
 		
+	}
+
+	//中根遍历非递归算法
+	function inRootTraverse(){
+		$T=$this->root;
+		if($T!=NULL){
+			$s=new linkStack();
+			$s->push($T);
+			while(!$s->isEmpty()){
+				while($s->peek()!=NULL){
+					$s->push($s->peek()->getLchild());
+				}
+				$s->pop();
+				if(!$s->isEmpty()){
+					$T=$s->pop();
+					print($T->getData());
+					$s->push($T->getRchild());
+				}
+			}
+		}
+	}
+
+	//后根遍历非递归算法
+	function postRootTraverse(){
+		$T=$this->root;
+		if($T!=NULL){
+			$s=new linkStack();
+			$s->push($T);
+			$flag=NULL;
+			$p=NULL;
+			while(!$s->isEmpty()){
+				while($s->peek()!=NULL){
+					$s->push($s->peek()->getLchild());
+				}
+				$s->pop();
+				while(!$s->isEmpty()){
+					$T=$s->peek();
+					if($T->getRchild()==NULL || $T->getRchild()==$p){
+						print($T->getData());
+						$s->pop();
+						$p=$T;
+						$flag=true;
+					}else{
+						$s->push($T->getRchild());
+						$flag=false;
+					}
+					if(!$flag){
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	//层次遍历算法
+	function levelTraverse(){
 
 	}
 
