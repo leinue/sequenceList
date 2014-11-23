@@ -283,4 +283,14 @@ function countNode($T){
 	return $count;
 }
 
+function getDepth($T){
+	if($T!=NULL){
+		$depth1=getDepth($T);
+		$depth2=getDepth($T);
+		return 1+($depth1>$depth2?$depth1:$depth2);
+	}else{
+		return 0;
+	}
+}
+
 ?>
