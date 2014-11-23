@@ -273,4 +273,14 @@ function searchNode($T,$x){
 	}
 }
 
+function countNode($T){
+	$count=0;
+	if($T!=NULL){
+		++$count;
+		$count=$count+countNode($T->getLchild());
+		$count=$count+countNode($T->getRchild());
+	}
+	return $count;
+}
+
 ?>
