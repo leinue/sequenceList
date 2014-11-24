@@ -180,7 +180,7 @@ class biTree{
 		$this->root=$new;
 	}
 
-	/*
+	
 	//先根遍历递归算法
 	function preRootTraverse(biTreeNode $T){
 		if($T!=NULL){
@@ -206,7 +206,7 @@ class biTree{
 			postOrderTraverse($T->getRchild());
 			print($T->getData());
 		}		
-	}*/
+	}
 
 	//先根遍历非递归算法
 	function preRootTraverse(){
