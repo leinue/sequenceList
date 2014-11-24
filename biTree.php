@@ -126,8 +126,20 @@ class biTree{
 
 	private $root;
 	
-	function __construct(){
-		
+	//由先根遍历和中根遍历建立一棵二叉树
+	function __construct($preOrder,$inOrder,$preIndex,$inIndex,$count){
+		if($count>0){
+			$r=$preOrder[0];
+			$i=0;
+			for(;$i<$count;$i++){
+				if($r==$inOrder[$i+$inIndex]){
+					break;
+				}
+			}
+			$root=new biTreeNode($r);
+			$root->setLchild(new biTree($preOrder,$inOrder,$preIndex+1,$inIndex,$i)->getRoot());
+			$root->setLchild(new biTree($preOrder,$inOrder,$preIndex+1+$i,$inIndex+$i+1,$count-$i-1)->getRoot());
+		}
 	}
 
 	function getRoot(){
