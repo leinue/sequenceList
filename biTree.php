@@ -125,21 +125,42 @@ class biTreeNode{
 class biTree{
 
 	private $root;
+	private $index=0;
 	
-	//由先根遍历和中根遍历建立一棵二叉树
-	function __construct($preOrder,$inOrder,$preIndex,$inIndex,$count){
-		if($count>0){
-			$r=$preOrder[0];
-			$i=0;
-			for(;$i<$count;$i++){
-				if($r==$inOrder[$i+$inIndex]){
-					break;
+	//method=0,由先根遍历和中根遍历建立一棵二叉树
+	//method=1,由标明空子树的先根遍历建立一棵二叉树
+	function __construct(
+		$method=0,$preOrder=NULL,$inOrder=NULL,$preIndex=NULL,$inIndex=NULL,$count=NULL,$preStr=NULL){
+		switch ($method) {
+			case 0:
+				if($count>0){
+					$r=$preOrder[0];
+					$i=0;
+					for(;$i<$count;$i++){
+						if($r==$inOrder[$i+$inIndex]){
+							break;
+						}
+					}
+					$root=new biTreeNode($r);
+					$root->setLchild(new biTree(0,$preOrder,$inOrder,$preIndex+1,$inIndex,$i)->getRoot());
+					$root->setLchild(new biTree(0,$preOrder,$inOrder,$preIndex+1+$i,$inIndex+$i+1,$count-$i-1)->getRoot());
 				}
-			}
-			$root=new biTreeNode($r);
-			$root->setLchild(new biTree($preOrder,$inOrder,$preIndex+1,$inIndex,$i)->getRoot());
-			$root->setLchild(new biTree($preOrder,$inOrder,$preIndex+1+$i,$inIndex+$i+1,$count-$i-1)->getRoot());
+				break;
+			case 1:
+				$c=$preStr[$this->index++];
+				if($c!='#'){
+					$this->root=new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$c);
+					$this->root=setLchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
+					$this->root=setRchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
+				}else{
+					$this->root=NULL;
+				}
+				break;
+			default:
+				return NULL;
+				break;
 		}
+
 	}
 
 	function getRoot(){
