@@ -149,9 +149,9 @@ class biTree{
 			case 1:
 				$c=$preStr[$this->index++];
 				if($c!='#'){
-					$this->root=new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$c);
-					$this->root=setLchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
-					$this->root=setRchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
+					$this->root=new biTreeNode($c);
+					$this->root->setLchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
+					$this->root->setRchild(new biTreeNode(1,NULL,NULL,NULL,NULL,NULL,$preStr)->getRoot());
 				}else{
 					$this->root=NULL;
 				}
@@ -161,6 +161,15 @@ class biTree{
 				break;
 		}
 
+	}
+
+	function createBiTree($sqBiTree,$index){
+		$this->root=NULL;
+		if($index>strlen($sqBiTree){
+			$this->root=new biTreeNode($$sqBiTree[$index]);
+			$this->root->setLchild(createBiTree($sqBiTree,2*$index+1));
+			$this->root->setRchild($sqBiTree,2*$index+2);
+		}
 	}
 
 	function getRoot(){
@@ -293,75 +302,76 @@ class biTree{
 		}
 	}
 
-}
-
-function searchNode($T,$x){
-	if($T!=NULL){
-		if($T->getData()==$x){
-			return $T;
-		}else{
-			$lresult=searchNode($T->getLchild(),$x);
-			return $lresult!=NULL?$lresult:searchNode($T->getRchild(),$x);
+	function searchNode($T,$x){
+		if($T!=NULL){
+			if($T->getData()==$x){
+				return $T;
+			}else{
+				$lresult=searchNode($T->getLchild(),$x);
+				return $lresult!=NULL?$lresult:searchNode($T->getRchild(),$x);
+			}
 		}
 	}
-}
 
-function countNode($T){
-	$count=0;
-	if($T!=NULL){
-		++$count;
-		$count=$count+countNode($T->getLchild());
-		$count=$count+countNode($T->getRchild());
-	}
-	return $count;
-}
-
-//使用层次遍历
-function countNodeWithQueue($T){
-	$count=0;
-	if($T!=NULL){
-		$l=new linkQueue();
-		$l->offer($T);
-		while(!$l->isEmpty()){
-			$T=$l->poll();
+	function countNode($T){
+		$count=0;
+		if($T!=NULL){
 			++$count;
-			if($T->getLchild()!=NULL){
-				$l->offer($T->getLchild());
-			}
-			if($T->getRchild()!=NULL){
-				$l->offer($T->getRchild());
-			}
+			$count=$count+countNode($T->getLchild());
+			$count=$count+countNode($T->getRchild());
 		}
-	}
-	return $count;
-}
-
-function getDepth($T){
-	if($T!=NULL){
-		$depth1=getDepth($T);
-		$depth2=getDepth($T);
-		return 1+($depth1>$depth2?$depth1:$depth2);
-	}else{
-		return 0;
-	}
-}
-
-function isEqual($T1,$T2){
-	if($T1=NULL && $T2=NULL){
-		return true;
+		return $count;
 	}
 
-	if($T1!=NULL && $T2!=NULL){
-		if($T1->getData()==$T2->getData()){
-			if(isEqual($T1->getLchild(),$T2->getLchild())){
-				if(isEqual($T1->getRchild(),$T2->getRchild())){
-					return true;
+	//使用层次遍历
+	function countNodeWithQueue($T){
+		$count=0;
+		if($T!=NULL){
+			$l=new linkQueue();
+			$l->offer($T);
+			while(!$l->isEmpty()){
+				$T=$l->poll();
+				++$count;
+				if($T->getLchild()!=NULL){
+					$l->offer($T->getLchild());
+				}
+				if($T->getRchild()!=NULL){
+					$l->offer($T->getRchild());
 				}
 			}
 		}
+		return $count;
 	}
 
-	return false;
+	function getDepth($T){
+		if($T!=NULL){
+			$depth1=getDepth($T);
+			$depth2=getDepth($T);
+			return 1+($depth1>$depth2?$depth1:$depth2);
+		}else{
+			return 0;
+		}
+	}
+
+	function isEqual($T1,$T2){
+		if($T1=NULL && $T2=NULL){
+			return true;
+		}
+
+		if($T1!=NULL && $T2!=NULL){
+			if($T1->getData()==$T2->getData()){
+				if(isEqual($T1->getLchild(),$T2->getLchild())){
+					if(isEqual($T1->getRchild(),$T2->getRchild())){
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 }
+
 
 ?>
