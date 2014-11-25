@@ -109,7 +109,14 @@ class huffmanTree{
 
 	//在HN[0..i-1]中选择不在哈夫曼树中且weight最小的结点
 	function selectMin($HN,$end){
-
+		$min=$HN[$end];
+		for($i=0;$i<=$end;$i++){
+			$h=$HN[$i];
+			if($h->getFlag==0 && $h->getWeight()<$min->getWeight()){
+				$min=$h;
+			}
+		}
+		return $min;
 	}
 }
 
