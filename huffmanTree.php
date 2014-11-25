@@ -91,6 +91,20 @@ class huffmanTree{
 
 		//由叶子到根逆向求每个字符的哈夫曼编码
 		$huffCode=array();
+		for($j=0;$j<$n;$j++){
+			$start=$n-1; //编码的开始位置,初始化为数组的结尾
+			for($c=$HN[$j],$p=$c->getParent();$p!=NULL;$c=$p,$p=$p->getParent()){
+				//从叶子到根逆向求编码
+				if($p->getLchild()==$c){ //左孩子为0
+					$huffCode[$j][$start--]=0;
+				}else{
+					//右孩子编码为1
+					$huffCode[$j][$start--]=1;
+				}
+			}
+			$huffCode[$j][$start]=-1; //编码的开始标志为-1,编码为-1之后的0,1序列
+		}
+		return $huffCode;
 	}
 
 	//在HN[0..i-1]中选择不在哈夫曼树中且weight最小的结点
