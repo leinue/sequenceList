@@ -63,7 +63,7 @@ class huffmanTreeNode{
 class huffmanTree{
 	
 	//求哈夫曼编码算法,$W存放N个字符的权值
-	function __construct($w){
+	function huffmanCoding($w){
 		$n=count($w); //字符个数
 		$m=2*$n; //哈夫曼树的结点数
 		$HN[]= new huffmanTreeNode($m);
@@ -74,7 +74,7 @@ class huffmanTree{
 		}
 
 		//构建哈夫曼树
-		for($i=$n;$i<$m<$i++){
+		for($i=$n;$i<$m;$i++){
 			$min1=$this->selectMin($HN,$i-1);
 			$min1->setFlag(1);
 			$min2=$this->selectMin($HN,$i-1);
@@ -118,6 +118,25 @@ class huffmanTree{
 		}
 		return $min;
 	}
+}
+
+$w=[23,11,5,3,29,14,7,8];
+$ht=new huffmanTree();
+$HN=$ht->huffmanCoding($w);
+
+print_r($HN);
+
+for($i=0;$i<count($HN);$i++){
+	print($w[$i]."    ");
+	for($j=0;$j<$HN[$j];$j++){
+		if($HN[$i][$j]==-1){
+			for($k=$j+1;$k<count($HN[$j]);$k++){
+				print($HN[$i][$k]);
+			}
+			break;
+		}
+	}
+	print("<br>");
 }
 
 ?>1
