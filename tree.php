@@ -49,6 +49,12 @@ function preRootTraverse($T){
 }
 
 //后根遍历树
-
+function postRoorTraverse($T){
+	if($T!=NULL){
+		preRootTraverse($T->firstChild());
+		print($T->getData());
+		preRootTraverse($T->getNextSibling());		
+	}
+}
 
 ?>
