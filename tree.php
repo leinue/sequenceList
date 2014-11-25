@@ -39,5 +39,16 @@ class CSTreeNode{
 	}
 }
 
+//先根遍历树
+function preRootTraverse($T){
+	if($T!=NULL){
+		print($T->getData());
+		preRootTraverse($T->firstChild());
+		preRootTraverse($T->getNextSibling());
+	}
+}
+
+//后根遍历树
+
 
 ?>
