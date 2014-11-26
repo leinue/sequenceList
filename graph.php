@@ -68,7 +68,11 @@ class MGraph{
 
 	//创建有向网
 	function createDN(){
-
+		for($k=0;$k<$this->arcNum;$k++){
+			$v=$this->locateVex($this->vexs[$k]);
+			$u=$this->locateVex($this->vexs[$k+1]);
+			$this->arcs[$v][$u]=$this->weight[$k];
+		}
 	}
 
 	function getVexNum(){
