@@ -20,7 +20,23 @@ class MGraph{
 
 	//创建图
 	function createGraph(){
-
+		switch($this->kind){
+			case 'UDG':
+				createUDG();
+				break;
+			case 'DG':
+				createDG();
+				break;
+			case 'UDN':
+				createUDN();
+				break;
+			case 'DN':
+				createDN();
+				break;
+			default:
+				return false;
+				break;
+		}
 	}
 
 	//创建无向图
