@@ -123,19 +123,7 @@ class ALGraph{
 
 	//创建无向网
 	function createUDN(){
-		//初始化邻接矩阵
-		/*for($v=0;$v<$this->vexNum;$v++){
-			for($u=0;$u<$vexNum;$u++){
-				$this->arcs[$v][$u]=2147483647;
-			}
-		}
 
-		//将两个顶点和权值加载到邻接矩阵中
-		for($k=0;$k<$this->arcNum;$k++){
-			$v=$this->locateVex($this->vexs[$k]);
-			$u=$this->locateVex($this->vexs[$k+1]);
-			$this->arcs[$v][$u]=$this->arcs[$u][$v]=$this->weight[$k];
-		}*/
 	}
 
 	//创建有向网
@@ -150,7 +138,9 @@ class ALGraph{
 	}
 
 	function addArc($v,$u,$value){
-
+		$arc=new arcNode($value,,$u);
+		$arc->setNextArc($this->vexs[$v]->getFirstArc());
+		$this->vexs[$v]->setFirstArc($arc);
 	}
 
 	function getVexNum(){
@@ -208,16 +198,7 @@ class ALGraph{
 
 	//返回v相对w的下一个邻接点,若w是v的最后一个邻接点,则返回-1,0<=v,w<vexNum
 	function nextAdjVex($v,$w){
-		/*if($v<0 && $v>=$this->vexNum){
-			return -2;
-		}else{
-			for($k=$w+1;$k<$this->vexNum;$k++){
-				if($this->arcs[$v][$k]!=0ik && $this->arcs[$v][$k]<2147483647){
-					return $k;
-				}
-			}
-			return -1;
-		}*/
+
 	}
 }
 
