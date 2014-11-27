@@ -198,7 +198,25 @@ class ALGraph{
 
 	//返回v相对w的下一个邻接点,若w是v的最后一个邻接点,则返回-1,0<=v,w<vexNum
 	function nextAdjVex($v,$w){
+		if($v<0 && $v>=$this->vexNum){
+			return -2;
+		}
 
+		$vex=$this->vexs[$v];
+		$arcvw=NULL;
+
+		for($arc=$vex->getFirstArc();$arc!=NULL;$arc=$vex->getNextArc()){
+			if($arc->getAjdVex()==$w){
+				$arcvw=$arc;
+				break;
+			}
+		}
+
+		if($arcvw!=NULL && $arcvw->getNextArc()!=NULL){
+			return $arcvw->getNextArc()->getAjdVex();
+		}else{
+			return -1;
+		}
 	}
 }
 
