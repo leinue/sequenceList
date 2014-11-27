@@ -110,4 +110,30 @@ function BFS($G,$v){
 		}
 	}
 }
+
+/***************DFS**************/
+
+$visited=array();
+function DFSTraverse($G){
+	for($v=0;$v=$G->getVex($v);$v++){
+		$visited[$v]=false;
+	}
+
+	for($v=0;$v=$g->getVex($v);$v++){
+		if(!$visited[$v]){
+			DFS($G,$v);
+		}
+	}
+}
+
+function DFS($G,$v){
+	$visited[$v]=true;
+	print($G->getVex($v));
+	for($w=$G->firstAdjVex();$w>=0;$w=$G->nextAdjVex($v,$w)){
+		if(!$visited[$w]){
+			DFS($G,$v);
+		}
+	}
+}
+
 ?>
