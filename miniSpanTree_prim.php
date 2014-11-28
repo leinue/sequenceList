@@ -28,7 +28,7 @@ class miniSpanTree_PRIM{
 	}
 
 	function PRIM(MGraph $G,$u){
-		$tree[$G->getVexNum()-1][2];
+		$tree=array();
 		$count=0;
 		$this->closeEdge=new CloseEdge($G->getVexNum());
 		$k=$G->locateVex($u);
@@ -38,6 +38,19 @@ class miniSpanTree_PRIM{
 			}
 		}
 		$this->closeEdge[$k]=new CloseEdge($u,0);
+		for($i=0;$i<$G->getVexNum();$i++){
+			$k=getMinMum($this->closeEdge);
+			$tree[$count][0]=$this->closeEdge[$k]->adjVex;
+			$tree[$count][1]=$G->getVexs()[$k];
+			$count++;
+			$this->closeEdge[$k]->lowCost=0;
+			for($j=0;$j<$G->getVexNum();$j++){
+				if($G->getArcs()[$k][$j]<$this->closeEdge[$j]->lowCost){
+					$this->closeEdge[$j]=new CloseEdge($G->getVexs($k),$G->getArcs()[$k][$j]);
+				}
+			}
+		}
+		return $tree;
 	}
 
 	function getMinMum(){
