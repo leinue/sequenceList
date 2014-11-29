@@ -84,5 +84,54 @@ class elementType{
 	}
 }
 
+/**
+* 顺序表类
+*/
+class seqList{
+	
+	private $r;//顺序表记录结点数组
+	private $curLen;//顺序表长度,即记录个数
+	private $maxSize;//存储空间容量
+
+	function __construct($max){
+		$this->maxSize=$max;
+		$this->curLen=0;
+	}
+
+	function getRecord(){
+		return $this->r;
+	}
+
+	function setRecord($new){
+		$this->r=$new;
+	}
+
+	function insert($index,recordNode $x){
+		if($this->curLen==$this->maxSize){
+			return -1; //序列表已满
+		}
+
+		if($index<0 || $index>$this->curLen){
+			return -2; //index不合法
+		}
+
+		for($i=$this->curLen;$i>$index;$i--){ 
+			$this->r[$i]=$this->r[$i-1];
+		}
+
+		$this->r[$index]=$x;
+		$this->curLen+=1;
+	}
+
+	function insertSortWithGuard(){
+		for($i;$i<$this->curLen;$i++){
+			$this->r[0]=$this->r[$i];
+			for($j=$i-1;$this->r[0]->getKey()->compareTo($r[$j]->getKey());$j--){
+
+			}
+		}
+	}
+}
+
 
 ?>
