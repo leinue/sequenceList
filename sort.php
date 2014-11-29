@@ -139,10 +139,22 @@ class seqList{
 			$dk=$d[$k];
 			for($i=$dk;$i<$this->curLen;$i++){
 				$this->r[0]=$this->r[$i];
-				for($j=$i-$dk;$this->r[0]->getKey()->compareTo($this->r[$j]->getKey());$j--){
+				for($j=$i-$dk;$this->r[0]->getKey()->compareTo($this->r[$j]->getKey());$j-=$dk){
 					$this->r[$j+$dk]=$this->r[$j];
 				}
 				$this->r[$j+$dk]=$this->r[0];
+			}
+		}
+	}
+
+	function bubbleSort(){
+		for($i=1;$i<$this->curLen;$i++){
+			for($j=0;$j<$this->curLen-$i;$j++){
+				if($this->r[$j]->getKey()->compareTo($this->r[$j+1]->getKey())>0){
+					$tmp=$this->r[$j];
+					$this->r[$j]=$this->r[$j+1];
+					$this->r[$j+1]=$tmp;
+				}
 			}
 		}
 	}
