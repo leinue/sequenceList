@@ -158,6 +158,42 @@ class seqList{
 			}
 		}
 	}
+
+	//快速排序算法
+
+	//一趟排序
+	function partition($i,$j){
+		$pivot=$this->r[$i];
+		while($i<$j){
+			while($i<$j && $pivot->getKey()->compareTo($this->r[$j]->getKey())<=0){
+				$j--;
+			}
+			if($i<$j){
+				$this->r[$i]=$this->r[$j];
+			}
+			while($i<$j && $pivot->getKey()->compareTo($this->r[$i]->getKey())>=0){
+				$i++;
+			}
+			if($i<$j){
+				$this->r[$j]=$this->r[$i];
+				$j--;
+			}
+		}
+		$this->r[$i]=$pivot;
+		return $i;
+	}
+
+	function qSort($low,$high){
+		if($low<$high){
+			$pivotLoc=$this->partition($low,$high);
+			$this->qSort($low,$pivotLoc-1);
+			$this->qSort($pivotLoc+1,$high);
+		}
+	}
+
+	function quickSort(){
+		$this->qSort(0,$this->curLen-1);
+	}
 }
 
 
