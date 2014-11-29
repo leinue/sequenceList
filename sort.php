@@ -126,8 +126,23 @@ class seqList{
 	function insertSortWithGuard(){
 		for($i;$i<$this->curLen;$i++){
 			$this->r[0]=$this->r[$i];
-			for($j=$i-1;$this->r[0]->getKey()->compareTo($r[$j]->getKey());$j--){
+			for($j=$i-1;$this->r[0]->getKey()->compareTo($this->r[$j]->getKey());$j--){
+				$this->r[$j+1]=$this->r[$j];
+			}
+			$this->r[$j+1]=$this->r[0];
+		}
+	}
 
+	function shellSort($d){ //d为增量数组
+		//控制增量,增量减半,若干趟扫描
+		for($k=0;$k<count($d);$k++){
+			$dk=$d[$k];
+			for($i=$dk;$i<$this->curLen;$i++){
+				$this->r[0]=$this->r[$i];
+				for($j=$i-$dk;$this->r[0]->getKey()->compareTo($this->r[$j]->getKey());$j--){
+					$this->r[$j+$dk]=$this->r[$j];
+				}
+				$this->r[$j+$dk]=$this->r[0];
 			}
 		}
 	}
