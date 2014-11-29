@@ -30,5 +30,35 @@ class recordNode{
 	}
 }
 
+/**
+* 记录关键字类
+*/
+class keyType{
+	
+	private $key;
+
+	function __construct($key=NULL){
+		$this->key=$key;
+	}
+
+	function getKey(){
+		return $this->key;
+	}
+
+	function setKey($key){
+		$this->key=$key;
+	}
+
+	function toString(){
+		return $key+" ";
+	}
+
+	function compareTo(keyType anotherType){
+		$thisVal=$this->key;
+		$anotherVal=$anotherType->getKey();
+		return ($thisVal<$anotherVal ? -1 : ($thisVal==$anotherVal ? 0:1));
+	}
+}
+
 
 ?>
