@@ -60,5 +60,29 @@ class keyType{
 	}
 }
 
+/**
+* 顺序表记录结点类
+*/
+class elementType{
+	
+	private $data;
+
+	function getData(){
+		return $this->data;
+	}
+
+	function setData($data){
+		$this->data=$data;
+	}
+
+	function toString(){
+		return $data;
+	}
+
+	function __construct($data=NULL){
+		$this->data=$data;
+	}
+}
+
 
 ?>
