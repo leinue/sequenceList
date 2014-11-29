@@ -194,6 +194,24 @@ class seqList{
 	function quickSort(){
 		$this->qSort(0,$this->curLen-1);
 	}
+
+	//选择排序
+
+	function selectSort(){
+		for($i=0;$i<$this->curLen-1;$i++){
+			$min=$i;
+			for($j=$i+1;$j<$this->curLen-1;$j++){
+				if($this->r[$j]->getKey()->compareTo($this->r[$min]->getKey())<0){
+					$min=$j;
+				}
+			}
+			if($min!=$i){
+				$tmp=$this->r[$i];
+				$this->r[$i]=$this->r[$min];
+				$this->r[$min]=$tmp;
+			}
+		}
+	}
 }
 
 
