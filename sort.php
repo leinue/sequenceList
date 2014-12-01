@@ -195,7 +195,7 @@ class seqList{
 		$this->qSort(0,$this->curLen-1);
 	}
 
-	//选择排序xxx
+	//选择排序
 
 	function selectSort(){
 		for($i=0;$i<$this->curLen-1;$i++){
