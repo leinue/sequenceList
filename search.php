@@ -82,6 +82,10 @@ class seqList{
 		$this->r=$new;
 	}
 
+	function length(){
+		return $this->curLen;
+	}
+
 	function insert($index,recordNode $x){
 		if($this->curLen==$this->maxSize){
 			return -1; //序列表已满
@@ -97,6 +101,20 @@ class seqList{
 
 		$this->r[$index]=$x;
 		$this->curLen+=1;
+	}
+
+	function seqSearch($key){
+		$i=0;
+		$n=$this->length();
+		while($i<$n && $this->$r[$i]->getKey()->compareTo($key)!=0){
+			$i++;
+		}
+
+		if($i<$n){
+			return $i;
+		}else{
+			return -1;
+		}
 	}
 
 }
