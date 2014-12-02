@@ -252,6 +252,19 @@ class seqList{
 		}
 	}
 
+	function mergeSort(){
+		$s=1;
+		$n=$this->curLen;
+
+		$tmp=new recordNode($n);
+		while($s<$n){
+			$this->mergepass($this->r,$tmp,$s,$n);
+			$s*=2;
+			$this->mergepass($tmp,$this->r,$s,$n);
+			$s*=2;
+		}
+	}
+
 }
 
 
