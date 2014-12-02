@@ -212,6 +212,31 @@ class seqList{
 			}
 		}
 	}
+
+	//归并2个有序序列
+
+	function merge($r,$order,$h,$m,$t){
+		$i=$h;
+		$j=$m+1;
+		$k=$h;
+
+		while($i<=$m && $j<=$t){
+			if($r[$i]->getKey()->compareTo($r[$j]->getKey())<=0){
+				$order[$k++]=$r[$i++];
+			}else{
+				$order[$k++]=$r[$j++];
+			}
+		}
+
+		while($i<=$m){
+			$order[$k++]=$r[$i++];
+		}
+
+		while($j<=$t){
+			$order[$k++]=$r[$j++];
+		}
+	}
+
 }
 
 
