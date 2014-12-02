@@ -237,6 +237,21 @@ class seqList{
 		}
 	}
 
+	function mergepass($r,$order,$s,$n){
+		$p=0;//p为每一对待合并表的第一个元素的下标,初始值为0
+		while($p+2*$s-1<=$n-1){
+			$this->merge($r,$order,$p,$p+$s-1,$p+2*$s-1);
+			$p+=2*$s;
+		}
+		if($p+$s-1<$n-1){
+			$this->merge($r,$order,$p,$p+$s-1,$n-1);
+		}else{
+			for($i=$p;$i<=$n-1;$i++){
+				$order[$i]=$r[$i];
+			}
+		}
+	}
+
 }
 
 
