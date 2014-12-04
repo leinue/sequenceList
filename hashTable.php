@@ -2,6 +2,7 @@
 
 /**
 * hash table
+* v2.0
 */
 class hashTable{
 	
